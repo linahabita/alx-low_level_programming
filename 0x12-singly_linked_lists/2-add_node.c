@@ -30,20 +30,21 @@ int _strlen(const char *s)
 */
 list_t *add_node(list_t **head, const char *str)
 {
-   list_t *add;
+   list_t *new;
+	unsigned int len = 0;
 
+	while (str[len])
+		len++;
 
-   add = malloc(sizeof(list_t));
-   if (add == NULL)
-       return (NULL);
-   add->str = strdup(str);
+	new = malloc(sizeof(list_t));
+	if (!new)
+		return (NULL);
 
+	new->str = strdup(str);
+	new->len = len;
+	new->next = (*head);
+	(*head) = new;
 
-   add->len = _strlen(str);
-   add->next = *head;
-   *head = add;
-
-
-   return (add);
+	return (*head);
 }
 
